@@ -9,34 +9,13 @@ import webbrowser, sys, pyperclip,requests,os,bs4,re
 foldername='cyanide and Happiness' #default
 absAddress='http://explosm.net'  #default
 def downloadFile(filename,foldername,res):
-    downloadDirectry='/home/kapil/Downloads/comics'
+    downloadDirectry='/home/kapil/Downloads/comics' #put your download directory here
     fileDirectory=downloadDirectry+'/'+foldername
     os.makedirs(fileDirectory, exist_ok=True)  #create folder for downloaded files
     file = open(os.path.join(fileDirectory, filename), 'wb')
     for chunk in res.iter_content(100000):
             file.write(chunk)
-
-           
-def checkValidLinks(linkElems):
-    
-    validlinks=[]
-    if(type=='pdf'):
-        for l in linkElems:
-            trueLink=re.split(r'&',l.get('href'))
-            filename, fileExt = os.path.splitext(trueLink[0])
-            print(fileExt)
-            #print(l.get('href'))
-            if fileExt=='.pdf':
-                validlinks.append(l.get('href'))
-               
-        
-    if(type=='ppt'):
-        for l in linkElems:
-            filename, fileExt = os.path.splitext(l.get('href'))
-            if fileExt=='.ppt'|'.pptx':
-                validlinks.append(l.get('href'))
-    return validlinks
-    
+ 
         
 def requestPage(urlAddress):
    # webbrowser.open(str(urlAddress))
