@@ -16,3 +16,5 @@ TODO:
 personally I will be adding support for calvin and Hobbes and peanuts in near future. You can also add support to your favourite
 comics. let's see what interests you.
 
+Time taken by script in complete execution: 
+1. cyanide and happiness: 1 hour - google drive link for downloaded comics .com/open?id=0B_lqxU8P0jbRYWxKTUY3MzgzWU0
