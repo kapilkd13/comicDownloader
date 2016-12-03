@@ -33,7 +33,7 @@ def getComicWebsiteLink(comicName):
         foldername='cyanide and Happiness'
         absAddress='http://explosm.net'
         return 'http://explosm.net/comics/latest' 
-    return 'http://explosm.net/comics/1715/' 
+    return 'http://explosm.net/comics/latest' 
 def getComicId(comicLink):
     return (str(comicLink).split('?')[0]).split('/')[-1]
 
