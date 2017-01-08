@@ -20,7 +20,7 @@ def downloadFile(filename,foldername,res):
 def requestPage(urlAddress):
    # webbrowser.open(str(urlAddress))
     try:
-        res = requests.get(urlAddress, headers={'User-Agent' : "Magic Browser"})
+        res = requests.get(urlAddress, headers={'User-Agent' : "Magic Browser"})#this site don't allow python scripts to make request
     except Exception as exc:
         print('There was a problem in getting destination file: %s' % (exc)) 
         print('trying again...')
@@ -29,7 +29,7 @@ def requestPage(urlAddress):
 
 
 def getComicWebsiteLink(comicName):
-    return 'http://www.gocomics.com/calvinandhobbes/2007/08/17' 
+    return 'http://www.gocomics.com/calvinandhobbes/1995/05/01' 
     
 def getComicId(comicLink):
     return (str(comicLink).split('?')[0]).split('/')[-1]
@@ -38,8 +38,6 @@ def getComicId(comicLink):
 def getComicLink(pageFile):
     soup = bs4.BeautifulSoup(pageFile.text,"html.parser")
     img=soup.find('img', {'class': 'strip'})
-   # if(img==None):
-    #    img=soup.find('div', {'class': 'small-12 medium-12 large-12 columns'}).find('embed')
     print(img)
     comicLink=str(img['src'])
     if(comicLink.split('/')[0]!='http:'):
@@ -65,7 +63,7 @@ else:
     comicName=str(comicName.split(sep=' ')[0]).lower()
    
   
-    #add file type to enhance more result oriented search
+#add file type to enhance more result oriented search
 urlAddress=getComicWebsiteLink(comicName)
 
 
@@ -76,8 +74,11 @@ try:
     res.raise_for_status()
 except Exception as exc:
     print('There was a problem: %s' % (exc))
+
     
+
 #find out oldest comic id
+#when runnig this script to download only new comics set the oldestComicId var to latest comic id you have downloaded
 soup = bs4.BeautifulSoup(res.text,"html.parser")
 div= soup.find('div', {'class': 'feature'})
 a = div.findAll('a', {'class': 'beginning'})[0]
