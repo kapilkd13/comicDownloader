@@ -29,7 +29,7 @@ def requestPage(urlAddress):
 
 
 def getComicWebsiteLink(comicName):
-    return 'http://www.gocomics.com/calvinandhobbes/1995/05/01' 
+    return 'http://www.gocomics.com/calvinandhobbes/1994/01/01' 
     
 def getComicId(comicLink):
     return (str(comicLink).split('?')[0]).split('/')[-1]
@@ -37,7 +37,8 @@ def getComicId(comicLink):
 
 def getComicLink(pageFile):
     soup = bs4.BeautifulSoup(pageFile.text,"html.parser")
-    img=soup.find('img', {'class': 'strip'})
+    imgbox=soup.find('picture', {'class': 'img-fluid item-comic-image'})
+    img=imgbox.findAll('img')[0]
     print(img)
     comicLink=str(img['src'])
     if(comicLink.split('/')[0]!='http:'):
@@ -46,8 +47,8 @@ def getComicLink(pageFile):
 
 def getNextPageLink(pageFile):
     soup = bs4.BeautifulSoup(pageFile.text,"html.parser")
-    for div in soup.findAll('div', {'class': 'feature'}):
-        a = div.findAll('a', {'class': 'prev'})[0]
+    div2= soup.find('div', {'class': 'button-icon-group'})
+    a = div2.findAll('a', {'class': 'fa btn btn-outline-default btn-circle fa-caret-left sm '})[0]
     print ( a.attrs['href'])
     nextPageLink = str(a.attrs['href'])
     return nextPageLink
@@ -80,8 +81,9 @@ except Exception as exc:
 #find out oldest comic id
 #when runnig this script to download only new comics set the oldestComicId var to latest comic id you have downloaded
 soup = bs4.BeautifulSoup(res.text,"html.parser")
-div= soup.find('div', {'class': 'feature'})
-a = div.findAll('a', {'class': 'beginning'})[0]
+div= soup.find('div', {'class': 'button-icon-group'})
+
+a = div.findAll('a', {'class': 'fa btn btn-outline-default btn-circle fa-backward sm '})[0]
 print ( a.attrs['href'])
 oldestPageLink = str(a.attrs['href'])
 oldestPageLink=absAddress+oldestPageLink
@@ -91,11 +93,15 @@ oldestComicId=getComicId(oldestcomicLink)
 print(oldestComicId+"dsf")   
     
 pageLink=urlAddress
-
-
+#9350ac30df8d01317256005056a9545d 1992
+#2e827ca0dece013171ac005056a9545d 1990
+#9bd16e60dec10131719a005056a9545d 1988
+#03f33460deb801317193005056a9545d 1986
+oldestComicId='2e827ca0dece013171ac005056a9545d'
 while True:
     pageFile=requestPage(pageLink)
     comicLink=getComicLink(pageFile)
+    print(comicLink)
     currentComicId=getComicId(comicLink)
     print(currentComicId)
     downloadFile(currentComicId, foldername, requestPage(comicLink))
@@ -103,6 +109,7 @@ while True:
         break
     pageLink=getNextPageLink(pageFile)
     pageLink=absAddress+pageLink
+    
 
 
     
