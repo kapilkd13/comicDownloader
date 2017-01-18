@@ -18,3 +18,7 @@ comics. let's see what interests you.
 
 Time taken by script in complete execution: 
 1. cyanide and happiness: 1 hour - google drive link for downloaded comics "https://drive.google.com/open?id=0B_lqxU8P0jbRYWxKTUY3MzgzWU0"
+
+UPDATE: I have added support for "Calvin and Hobbes" comic strip also. You can find the file in the comic folder with the name "comicDownloaderCalvinandHobbes"
+Soon I will be uploading the comics to my drive and will share the direct download link. Cheeers!
+You you want any other comics Message me, and I will provide you script as soon as possible.
